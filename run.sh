@@ -4,4 +4,6 @@ pip freeze > requirements.txt
 
 black .
 
-uvicorn app.main.main:create_app --reload
+python feed.py
+
+uvicorn app.server.main:create_app --host 0.0.0.0 --port 8000 --reload --factory
