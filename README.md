@@ -16,20 +16,21 @@
 
 - **Database**: Manage database connections.
 - **Models**: Define base models (e.g., Base).
-- **Settings**: Configure settings (e.g., database, email, environment variables).
+- **settings.py**: Configure settings (e.g., database, email, environment variables).
+- **Migrations**: Database migrations
+- **Utils**: Write general utility functions (e.g., send email, generate random values).
 
-# Main
+# Server
 
 - **Main**: Main file (e.g., main.py) where all routers are registered.
 - **Middleware**: Define middleware (e.g., logging, authentication).
 
 # Tests
 
-- **Tests**: Write unit tests (e.g., test_get_user, test_get_product, test_cart_operations).
+- **Tests**: Write test (e.g., test_get_user, test_get_product, test_cart_operations).
 
 # Others
 
-- **Alembic**: Manage alembic migrations (e.g., create_user_table, create_product_table).
 - **Docker**: Write Docker files (e.g., Dockerfile, docker-compose.yml).
 - **GitHub Actions**: Configure GitHub Actions (e.g., CI/CD).
 - **.gitignore**: Define files and folders to ignore (e.g., .env, .vscode, __pycache__).
@@ -48,7 +49,7 @@
    - Create .env file and write environment variables
    - Run `pip install -r requirements.txt`
    - Run `alembic upgrade head`
-   - Run `./run.sh` or `uvicorn app.main.main:create_app --reload`
+   - Run `./run.sh` or `uvicorn app.server.main:create_app --reload --factory`
    - Go to [http://localhost:8000/docs](http://localhost:8000/docs)
 
 # How to run tests
