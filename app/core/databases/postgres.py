@@ -15,7 +15,7 @@ settings = get_settings()
 @cache
 def get_async_engine():
     return create_async_engine(
-        "postgresql+asyncpg://" + settings.get_postgres_url,
+        "postgresql+asyncpg://" + settings.GET_POSTGRES_URL,
         pool_size=3,
         max_overflow=5,
         future=True,

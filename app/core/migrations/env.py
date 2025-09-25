@@ -5,7 +5,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 
-from app.core.models.base import Base
+from app.core.models import Base
 from app.core.settings import get_settings, Settings
 
 settings: Settings = get_settings()
@@ -21,7 +21,7 @@ if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
 config.set_main_option(
-    "sqlalchemy.url", "postgresql+psycopg2://" + settings.get_postgres_url
+    "sqlalchemy.url", "postgresql+psycopg2://" + settings.GET_POSTGRES_URL
 )
 target_metadata = Base.metadata
 
