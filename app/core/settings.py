@@ -1,16 +1,11 @@
 from functools import cache
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    # API
-    API_V1_STR: str
-    BASE_URL: str
-
-    # PROJECT METADATA
-    PROJECT_NAME: str
-    PROJECT_DESCRIPTION: str
-    PROJECT_VERSION: str
+    DEBUG: bool = False
 
     # POSTGRES CREDENTIALS
     POSTGRES_USER: str
@@ -19,11 +14,17 @@ class Settings(BaseSettings):
     POSTGRES_PORT: str
     POSTGRES_DATABASE: str
 
-    model_config = SettingsConfigDict(env_file=".env")
+    model_config = SettingsConfigDict(
+        env_file=".env", env_file_encoding="utf-8", extra="ignore"
+    )
 
     @property
-    def get_postgres_url(self):
+    def GET_POSTGRES_URL(self):  # noqa
         return f"{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DATABASE}"
+
+    @property
+    def BASE_DIR(self) -> Path:  # noqa
+        return Path(__file__).parent.parent.parent
 
 
 @cache

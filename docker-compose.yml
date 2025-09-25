@@ -1,4 +1,36 @@
 services:
+  postgres:
+    image: postgres:17.6-alpine
+    env_file:
+      - ./example.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  postgres_test:
+    image: postgres:17.6-alpine
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - test-postgres-data:/var/lib/postgresql/data
+    networks:
+      - app-network
+    restart: on-failure
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-postgres}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+
   api:
     build:
       context: .
@@ -9,24 +41,13 @@ services:
       - postgres
     volumes:
       - .:/app
+      - ./media:/app/media
+      - ./static:/app/static
     networks:
       - app-network
-
-  postgres:
-    image: postgres:latest
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    networks:
-      - app-network
-
 volumes:
   postgres-data:
+  test-postgres-data:
 
 networks:
   app-network:
