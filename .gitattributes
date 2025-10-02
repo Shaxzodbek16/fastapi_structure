@@ -1,2 +1,37 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.rst text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+*.toml text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.json text eol=lf
+
+*.sh text eol=lf
+Dockerfile text eol=lf
+*.dockerfile text eol=lf
+docker-compose*.yml text eol=lf
+
+*.sql text eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+
+*.pyc binary
+*.pyo binary
+__pycache__ binary
+
+Pipfile.lock merge=ours
+poetry.lock merge=ours
+
+app/core/migrations/versions/* merge=ours
+
+.env export-ignore
+.env.* export-ignore
+*.secret export-ignore
+secrets/* export-ignore
