@@ -64,3 +64,9 @@
 # How to use black
 
 - Run `black . --exclude venv` to format all files except the venv folder
+
+# ✅ Check TODOs in Code
+
+- [ ] Perform a full-project search for `TODO`
+- [ ] Review each occurrence
+- [ ] Adjust or resolve as needed

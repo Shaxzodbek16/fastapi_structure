@@ -16,7 +16,7 @@ def event_loop():
     loop.close()
 
 
-DATABASE_URL = "postgresql+asyncpg://postgres:postgres@localhost:5433/postgres"  # Note: Adjust the port if necessary
+DATABASE_URL = "postgresql+asyncpg://postgres:postgres@localhost:5433/postgres"  # TODO: Adjust the port if necessary
 
 engine = create_async_engine(DATABASE_URL, future=True, echo=False)
 TestingSessionLocal = async_sessionmaker(
